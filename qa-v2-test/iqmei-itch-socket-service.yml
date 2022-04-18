@@ -1,0 +1,86 @@
+spring:
+  application:
+    name: iqmei-itch-socket-service
+  zipkin:
+    base-url:  http://localhost:10000/
+  sleuth:
+    sampler:
+      probability: 1  
+            
+logging.level.org.springframework.web.servlet.DispatcherServlet: DEBUG
+    
+server:
+  port: 3451
+  
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://reg.atlasifs.com:4000/eureka}
+  instance:
+    preferIpAddress: true
+    
+
+spring.output.ansi.enabled: ALWAYS      
+## Spring DATASOURCE (DataSourceAutoConfiguration & DataSourceProperties)
+spring.datasource.url: jdbc:postgresql://34.87.160.21:5432/atlasifs
+spring.datasource.username: atlasifs
+spring.datasource.password: atl@s1fs88
+
+# Resolve - Caused by: java.sql.SQLFeatureNotSupportedException: Method org.postgresql.jdbc.PgConnection.createClob() is not yet implemented.
+spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation: true
+
+# Hibernate ddl auto (create, create-drop, validate, update)
+#spring.jpa.hibernate.ddl-auto: update    
+spring.jpa.properties.hibernate.temp.use_jdbc_metadata_defaults: false
+#spring.jpa.hibernate.ddl-auto: update
+spring.jpa.show-sql: true #show sql query in console
+logging.level.org.hibernate.SQL: debug 
+#logging.level.org.hibernate.type.descriptor.sql: TRACE
+spring.jpa.database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+#spring.rabbitmq.listener.direct.retry.enabled: true
+#spring.rabbitmq.listener.simple.retry.enabled: true
+
+#===============swagger ui comment bottom line in production ====
+swaggerconstant:
+  base_package: com.hiteshi.iqmei.itch.service
+  project_title: IQMEI Api
+  project_description: IQMEI Api for IQMEI Web and Mobile Client(s) 
+  version: 1.0.0-v2
+  company_name: Hiteshi Infotech
+  company_url: http://www.hiteshi.com
+  company_email: support@hiteshi.com
+  company_license: Apache 2.0
+  company_license_url: http://www.apache.org/licenses/LICENSE-2.0
+#===============Enable/disable swagger ui comment bottom line in production ====
+
+global.api.sessionId: FIX.4.2:IQMEI->FIXIMULATOR
+global.pse_url: http://phisix-api4.appspot.com/stocks.json
+
+#=============cron ================
+global.cron_time: 0 01 01 * * ?
+global.cron_time_after: 0 09 01 * * ?
+global.test_cron_time: 0 05 15 * * ?
+global.temp_cron_add: 0 09 01 * * ?
+#=============pagination ================
+global.default_no_of_records: 20
+#==================CONSTANT CONFIGURATION =================
+globalconstant:
+  method_error: Method error occurred and error is 
+  method_success: Method successfully called in 
+  success_status: false
+  error_status: true 
+  already_exist: Already exist please try another  
+  record_list: List of records 
+  record_delete: Record has been removed!
+  record_added: Record has been added
+  record_updated: Record has been updated
+  record_details: Record details
+  not_exist: Record has been not found! 
+  wishlist_added: Item has been added to your watch list successfully.
+  wishlist_deleted: Item has been removed from your watchlist successfully.
+  some_thing_wrong: Something went wrong please try again
+  requiredParameters: Parameter {0} is required!.
+  minimum_3_characters: It must be at least 3 characters long.
+#==================CONSTANT CONFIGURATION =================
+#logging.file: ITCHServer.log
+#spring.output.ansi.enabled: always
