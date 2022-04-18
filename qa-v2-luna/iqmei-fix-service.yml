@@ -1,0 +1,119 @@
+spring:
+  application:
+    name: iqmei-fix-service
+  zipkin:
+    base-url:  http://localhost:10000/
+  sleuth:
+    sampler:
+      probability: 1  
+            
+logging.level.org.springframework.web.servlet.DispatcherServlet: DEBUG
+    
+server:
+  port: 5002
+  
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:4010/eureka}
+  instance:
+    preferIpAddress: true
+
+#==================DATABASE CONFIGURATION============================	
+spring.output.ansi.enabled: ALWAYS      
+## Spring DATASOURCE (DataSourceAutoConfiguration & DataSourceProperties)
+spring.datasource.url: jdbc:postgresql://34.87.160.21:5432/luna
+spring.datasource.username: atlasifs
+spring.datasource.password: atl@s1fs88
+
+# Resolve - Caused by: java.sql.SQLFeatureNotSupportedException: Method org.postgresql.jdbc.PgConnection.createClob() is not yet implemented.
+spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation: true
+
+# Hibernate ddl auto (create, create-drop, validate, update)
+#spring.jpa.hibernate.ddl-auto: update    
+spring.jpa.properties.hibernate.temp.use_jdbc_metadata_defaults: false
+spring.jpa.hibernate.ddl-auto: update
+#spring.jpa.properties.hibernate.dialect: org.hibernate.dialect.PostgreSQL95Dialect
+# The SQL dialect makes Hibernate generate better SQL for the chosen database
+#spring.jpa.properties.hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+#spring.jpa.properties.hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+#spring.jpa.database-platform: org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+spring.rabbitmq.listener.direct.retry.enabled: true
+spring.rabbitmq.listener.simple.retry.enabled: true
+
+#===============swagger ui comment bottom line in production ====
+swaggerconstant:
+  base_package: com.hiteshi.iqmei.fix.service
+  project_title: IQMEI Api
+  project_description: IQMEI Api for IQMEI Web and Mobile Client(s) 
+  version: 1.0.0-v2
+  company_name: IQ Management Enterprises, Inc.
+  company_url: http://www.iqmei.com
+  company_email:  marcos.sicat@iqmei.com
+  company_license: Apache 2.0
+  company_license_url: http://www.apache.org/licenses/LICENSE-2.0
+#===============Enable/disable swagger ui comment bottom line in production ====
+
+global.api.sessionId: FIXT.1.1:135->PSE
+global.default_no_of_records: 20
+#==================CONSTATANT CONFIGURATION =================
+globalconstant:
+  #base_static_url: http://localhost:3000/api/v1/
+  base_static_url: http://beta-api.atlasifs.com:3000/api/v1/
+  method_error: Method error occurred and error is 
+  method_success: Method successfully called in 
+  success_status: false
+  error_status: true 
+  already_exist: Already exist please try another  
+  record_list: List of records 
+  record_delete: Record has been removed!
+  record_added: Record has been added
+  record_updated: Record has been updated
+  record_details: Record details
+  not_exist: Record has been not found!
+  some_thing_wrong: Something went wrong please try again
+  requiredParameters: Parameter {0} is required!.
+  add_order: Your order has been placed.
+  wallet_amount_less: Insufficient balance in wallet.
+  not_active_user_msg: User is not active.
+  reject_or_cancel_msg: The order has been successfully executed for cancellation.
+  reject_cancel_order_by_pse_msg: Your canceled order has been rejected from PSE, Text
+  reject_cancel_order_by_pse: Cancel order is rejected by PSE.
+  reject_cancel_order_by_pse_email_msg: Your cancel order for {0} with {1} shares at {2} was rejected by PSE.<br/> <b>{3}</b> <br/><br/>You can check the status of this order on Atlas.<br/><br/>
+  reject_modify_order_by_pse: Modify order is rejected by PSE.
+  reject_modify_order_by_pse_email_msg: Your modify order for {0} with {1} shares at {2} was rejected by PSE.<br/> <b>{3}</b> <br/><br/>You can check the status of this order on Atlas.<br/><br/>
+
+  insufficient_shares: Insufficient shares in your account.
+  buy_order_email_msg: You have submitted a {0} order to {1} {2} share of {3} worth PHP {4}.<br/><br/>You can check the status of this order on Atlas .<br/><br/>We will notify you when this order has been executed.
+  order_akn_order_subject_heading: Your order has been received
+  order_akn_order_email_msg: You had submitted a {0} order to {1} {2} share of {3} worth PHP{4} .<br/><br/> Your order has been received.<br/><br/>You can check the status of this order on Atlas .<br/><br/> We will notify you when this order has been executed.
+  order_reject_order_subject_heading: Your order has been rejected
+  order_reject_order_email_msg: You had submitted a {0} order to {1} {2} share of {3} worth PHP{4} .<br/><br/> Your order is rejected.<br/> <b>{5}</b> <br/><br/>You can check the status of this order on Atlas.<br/><br/>
+  order_expired_order_subject_heading: Your order has expired.
+  order_expired_order_email_msg: You had submitted a {0} order to {1} {2} share of {3} worth PHP{4} .<br/><br/> Your order has been expired. It expired on {5}.<br/><br/> You can check the status of this order on Atlas.<br/><br/>
+  order_cancel_order_subject_heading: Your order has been canceled
+  order_partially_cancel_order_subject_heading: Your partially filled order has been canceled 
+  order_cancel_order_email_msg: You had submitted a {0} order to {1} {2} share of {3} worth PHP{4} .<br/><br/> Your order has been canceled.<br/><br/>You can check the status of this order on Atlas.<br/><br/>
+  order_partially_cancel_order_email_msg: You had submitted a {0} order to {1} {2} share of {3} worth PHP{4} .<br/><br/> Your remaining {5} canceled.<br/><br/>You can check the status of this order on Atlas.<br/><br/>
+  order_executed_order_subject_heading: Your order has been executed
+  order_executed_order_email_msg: You had submitted a {0} order to {1} {2} share of {3} worth PHP{4} .<br/><br/> Your order has been {5} completed. <br/><br/> {6} out of {7} shares has been executed at a traded price of {8} on {9}. You can check the status of this order on Atlas.
+  order_dfd_order_subject_heading: Done for the day 
+  order_dfd_order_email_msg: You had submitted a {0} order to {1} {2} share of {3} worth PHP{4} .<br/><br/> We are {5} . <br/><br/> {6} out of {7} shares has been executed.<br/><br/>You can check the status of this order on Atlas.
+  order_cancel_by_user_order_subject_heading: Your order has been canceled
+  order_cancel_by_user_order_email_msg: You had submitted a {0} order to {1} {2} share of {3} worth PHP{4} .<br/><br/> Your order has been canceled.<br/><br/> You can check the status of this order on Atlas.<br/><br/>
+  order_cancel_by_user_client_order_email_msg: You had submitted a {0} order to {1} {2} share of {3} worth PHP{4} .<br/><br/> Your order has been queued to be canceled.<br/><br/> You can check the status of this order on Atlas.<br/><br/>
+  order_cancel_by_user_client_order_subject_heading: Your order has been queued to be canceled
+  order_replace_by_user_order_subject_heading: Your order has been replace
+  order_replace_by_user_order_email_msg: You had submitted a {0} order to {1} {2} share of {3} worth PHP{4} .<br/><br/> Your order has been updated.<br/><br/> You can check the status of this order on Atlas.<br/><br/>
+  invalid_board_lot_size: Invalid main lot size
+  invalid_board_lot_size_must_be_multiple: Invalid board lot size must be multiple of 
+  invalid_main_lot_size_must_be_multiple: Invalid number of shares. The minimum required lot size is 
+  logs_description: OrderId = {0} | Order Type = {1} |  Order side = {2} | Quantity = {3} | Symbol = {4}  | Amount = {5}
+  invalid_share_price:  You do not have enough funds to cover the purchase of {0} for {1} at {2}. Please deposit additional funds.
+  #0=order side,1=ordertype,2=quantity,3=symbol,4=amount
+#==================CONSTATANT CONFIGURATION =================
+#==for send mail error two time call====
+feign.client.config.default.connectTimeout: 160000000
+feign.client.config.default.readTimeout: 160000000
+#==for send mail error two time call====

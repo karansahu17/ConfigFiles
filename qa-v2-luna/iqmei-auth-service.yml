@@ -1,0 +1,284 @@
+spring:
+  application:
+    name: iqmei-auth-service
+  zipkin:
+    base-url:  http://localhost:10000/
+  sleuth:
+    sampler:
+      probability: 1  
+               
+server:
+  port: 3500
+  
+  
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:4010/eureka}
+  instance:
+    preferIpAddress: true  
+  
+logging.level: 
+  org.springframework.security.oauth2: debug     
+  
+
+#=============DATA BASE CONFIGURATIONS ================
+## Spring DATASOURCE (DataSourceAutoConfiguration & DataSourceProperties)
+spring.datasource.url: jdbc:postgresql://34.87.160.21:5432/luna
+spring.datasource.username: atlasifs
+spring.datasource.password: atl@s1fs88
+
+# Resolve - Caused by: java.sql.SQLFeatureNotSupportedException: Method org.postgresql.jdbc.PgConnection.createClob() is not yet implemented.
+spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation: true
+
+# Hibernate ddl auto (create, create-drop, validate, update)
+#spring.jpa.hibernate.ddl-auto: update    
+spring.jpa.properties.hibernate.temp.use_jdbc_metadata_defaults: false
+spring.jpa.hibernate.ddl-auto: update
+#spring.jpa.properties.hibernate.dialect: org.hibernate.dialect.PostgreSQL95Dialect
+# The SQL dialect makes Hibernate generate better SQL for the chosen database
+#spring.jpa.properties.hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+#spring.jpa.properties.hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+#spring.jpa.database-platform: org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+
+#defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+
+
+#=============LOCAL FILE ================
+global:
+  base_static_url: https://api.atlasifs.com/api/v1/
+  image_dir_name: images/
+  pdf_dir_name: pdf/
+  upload_dir: ./src/main/resources/pdf/
+  upload_dir_image: ./src/main/resources/images/
+  base_url: ${global.base_static_url}auth/images/
+  api.apiUrl: http://psecert.atlasifs.com/resetpassword?
+  api.setPasswordUrl: http://psecert.atlasifs.com/setpassword?  
+  api.ResetPinApiUrl: http://psecert.atlasifs.com/ResetPin?
+  upload_dir_external: file:uploads/
+  upload_dir_external_path: uploads/
+  upload_dir_external_image: file:uploads/images/
+  upload_dir_external_image_path: uploads/images/
+  
+  static_dir_path: classpath:/static/
+  static_dir_resource_path: static/
+  static_dir_resource_path_url: ${global.base_static_url}auth/static/
+  static_dir_resource_path_images_url: ${global.base_static_url}auth/static/images/
+  static_dir_resource_image_path: static/images/
+  
+  logo_image_name_large: logo-atlas-large.png
+  logo_image_path_large: static/images/${global.logo_image_name_large}
+  
+  logo_image_name_small: logo-atlas.png
+  logo_image_path_small: images/${global.logo_image_name_small}
+
+  logo_image_name_large_dark: logo-atlas-dark-large.png
+  logo_image_path_large_dark: static/images/${global.logo_image_name_large_dark}
+
+  logo_image_name_small_dark: logo-atlas-dark.png
+  logo_image_path_small_dark: static/images/${global.logo_image_name_small_dark}
+  
+
+#global.api.apiUrl: http://iqmei-web.hiteshi.com/ResetPassword?
+
+
+#=============Email configuration ================
+spring.mail.host: smtp.gmail.com
+spring.mail.port: 465
+spring.mail.username: support@atlasifs.com
+spring.mail.password: atl@sifs88
+send.from.email: support@atlasifs.com
+spring.mail.properties.mail.smtp.auth:  true
+#spring.mail.properties.mail.smtp.starttls.enable: true
+#spring.mail.properties.mail.smtp.starttls.required: true
+spring.mail.properties.mail.smtp.ssl.enable: true
+#spring.mail.properties.mail.socketFactory.port: 587
+spring.mail.properties.mail.socketFactory.class: javax.net.ssl.SSLSocketFactory
+spring.mail.properties.mail.socketFactory.fallback: false
+#spring.jpa.properties.hibernate.temp.use_jdbc_metadata_defaults: false
+
+#spring.jpa.properties.hibernate.format_sql: true
+#spring.jpa.properties.hibernate.id.new_generator_mappings: true
+spring.jpa.hibernate.use-new-id-generator-mappings: true
+#spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation: true
+
+#spring.flyway.locations: classpath:db/migration/postgresql
+#spring.flyway.baseline-on-migrate: true
+
+
+#=============JWT TOKEN ================
+security.signing-key: MaYzkSjmkzPC57L
+security.security-realm: Spring Boot IQMEI
+
+security.jwt.client-id: testjwtclientid
+security.jwt.client-secret: XY7kmzoNzl100
+security.jwt.grant-type: password
+security.jwt.grant_type_refresh: refresh_token
+security.jwt.authorization_code: authorization_code
+security.jwt.implicit : implicit
+
+
+security.jwt.scope-read: read
+security.jwt.scope-write: write
+security.jwt.resource-ids: testjwtresourceid
+#security.jwt.access_token_validity: 3600   #1hrs
+security.jwt.access_token_validity: 18000   #5minute
+security.jwt.refresh_token_validity_seconds: 86400   #1day
+
+#=============Upload File Size ================
+spring.servlet.multipart.enabled: true
+spring.servlet.multipart.max-file-size: -1
+spring.servlet.multipart.max-request-size: -1
+
+#===============swagger ui comment bottom line in production ====
+swaggerconstant:
+  base_package: com.hiteshi.iqmei.auth.service
+  project_title: IQMEI Api
+  project_description: IQMEI Api for IQMEI Web and Mobile Client(s) 
+  version: 1.0.0-v2
+  company_name: IQ Management Enteprises, Inc.
+  company_url: http://www.iqmei.com
+  company_email: marcos.sicat@iqmei.com
+  company_license: Apache 2.0
+  company_license_url: http://www.apache.org/licenses/LICENSE-2.0
+#===============Enable/disable swagger ui comment bottom line in production ====
+
+#=============pagination ================
+global.default_no_of_records: 20
+#=============global constant ================
+globalconstant:
+  #====Commn error msg====
+  method_error: Method error occurred and error is 
+  method_success: Method successfully called in 
+  success_status: false
+  error_status: true 
+  already_exist: Already exist please try another  
+  record_list: List of records 
+  record_delete: Record has been removed!
+  record_added: Record has been added
+  record_updated: Record has been updated
+  record_details: Record details
+  not_exist: Record has been not found!
+  some_thing_wrong: Something went wrong please try again
+  requiredParameters: Parameter {0} is required!.
+  default_secret_key: 25f9e794323b453885f5181f1b624d0b
+  #====user msg====
+  unauthorise_user: Unauthorized User
+  email_exist: Email Already Exist
+  email_not_exist: Email not Exist
+  invalid_username_or_email: Invalid Username/Email 
+  invalid_token: Token does not exist
+  invalid_password: Please enter correct current password 
+  invalid_current_pin: Current Pin is incorrect
+  reset_password_link_sent: Password reset link has been sent to your email address. 
+  reset_password_expired_link_sent: Your password has been expired. Password reset link has been sent to your email address.
+  reset_pin_link_sent: PIN reset link has been sent to your email address.
+  username_or_email_exist: Username Or Email Exist.
+  username_or_email_not_exist: Username Or Email Not Exist.
+  invalid_username_or_password: Invalid username or password.
+  sign_success: SignIn Successfully.
+  password_updated: Password has been updated.
+  status_updated: Status has been updated.
+  profile_updated: Profile has been updated.
+  pin_updated: Pin has been Updated!
+  invalid_pin: Invalid pin!
+  reset_username: Your request has been submitted successfully. You will receive an email on your Registered email address for further information. 
+  matched_password: Current password and new password should not be same.
+  matched_pin: Current pin and new pin should not be same.
+  minimum_3_characters: It must be at least 3 characters long.
+  username_exist: Username already exist
+  logout: You Have Successfully Logged out of your Account.
+  inactive_status: User is not activated.
+  #====Contact us msg======
+  msg_sent: Message has been sent
+  request_sent: Your request has been submitted successfully.
+  #====Wallet error msg====
+  wallet_amount_greater: Current wallet amount is less to Debit the amount
+  credit_title: Amount Credit.
+  credit_message: Amount PHP{0} has been successfully credited to your account!.
+  debite_title: Amount Debited.
+  debite_message: Amount PHP{0} has been successfully debited from your account!.
+  close_account_title: Close account.
+  close_account_message: Your account has been closed!.
+  add_order_title: Your order has been placed.
+  add_order_message: Your order has been placed.
+  email_template_reach_mail: support@atlasifs.com
+  email_template_team_name: The Atlas Team
+  email_template_weburl: http://psecert.atlasifs.com
+  
+  #Alert Email
+  alertmail_userOne: marcos.sicat@iqmei.com
+  alertmail_userTwo: marcos.sicat@atlasifs.com
+  alertmail_userThree: marcos.sicat@iqmei.com
+#=============global constant ================
+globalemailconstant:
+    #====credit msg====
+    credit_sub_msg: Amount Credited
+    credit_body_msg: Amount has been successfully credited to your account!
+    credit_amount_msg: Amount- &#8369;
+    #====debit msg====
+    debit_sub_msg: Amount Debited
+    debit_body_msg: Amount has been successfully debited from your account!
+    debit_amount_msg: Amount- &#8369;
+    #====debit msg====
+    create_acc_sub_msg: Account Created
+    create_acc_body_msg: <br>Your account has been created. An Administrator will review and approve it. You will be informed with another email when your account is approved. Please check back later or contact the Administrator for your account status.
+    create_acc_msg: Your Username , Password and Pin is - 
+    #====reset pin msg====
+    reset_pin_sub_msg: Reset Pin
+    reset_pin_body_msg: Welcome, A request to reset your account PIN was received. click the below link to reset your PIN.
+    reset_pin_msg: 
+    #====reset password msg====
+    reset_password_sub_msg: Reset password
+    reset_password_body_msg: Welcome, A request to reset your account password was received. click the below link to reset your password.
+    reset_password_msg: 
+    #====reset username msg====
+    reset_username_sub_msg: Recover Username
+    reset_username_body_msg: Welcome, Use the below Username to get logged in to the application.
+    reset_username_msg: Your Username is &nbsp;  
+    #===Activate Account by admin msg====
+    acc_active_sub_msg: Account Activated
+    acc_active_body_msg: Your account has been activated
+    acc_active_msg:  
+    #===Activate Account by admin msg====
+    acc_cancel_sub_msg: Account Deactivated/Cancelled
+    acc_cancel_body_msg: Your account has been deactivated. Please Contact to Adminstrator for more details.
+    acc_cancel_msg: Your Account has been Cancelled  
+    #===Close Account by admin====
+    acc_close_sub_msg: Account Closed
+    acc_close_body_msg: Your account has been Closed. Please Contact to Adminstrator for more details.
+    acc_close_msg: Your Account has been Closed 
+    #===Contact us ====
+    contact_us_sub_msg: Contact Us Request/Enquiry
+    contact_us_body_msg: User Enquiry received.
+    contact_us_msg:  
+    #===update_pin_sub_msg====
+    update_pin_sub_msg: Changed Pin 
+    update_pin_body_msg: Your PIN has been changed successfully.
+    update_pin_msg:  
+    #===update password ====
+    update_password_sub_msg: Changed Password  
+    update_password_body_msg: Your password has been changed successfully.
+    update_password_msg:  
+    #===expiry password ====
+    expiry_password_sub_msg: Password Expired  
+    expiry_password_body_msg: Your password has been expired. You can reset your account password using below link.
+    expiry_password_msg: 
+    #===add order  ====
+    add_order_sub_msg: Your order has been placed 
+    add_order_body_msg: 
+    add_order_msg:  
+    #===add order  ====		
+    transaction_subject: Transaction Report 
+    transaction_msg: Kindly find attachment of transaction report 
+    #===update profile ====
+    update_profile_sub_msg: Changed profile information  
+    update_profile_body_msg: Your profile has been changed successfully.
+    update_profile_msg: 
+    #===contact us ====
+    contact_us_revert_sub_msg: Contact Us   
+    contact_us_revert_msg: Your email has been successfully sent and we appreciate you contacting us. We'll be in touch soon.
+#=============global constant ================
+
+
