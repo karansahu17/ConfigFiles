@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: iqmei-service-registry-server
+  zipkin:
+    base-url:  http://localhost:10000/
+  sleuth:
+    sampler:
+      probability: 1  
+  
+    
+
+    
+logging.level.org.springframework.web.servlet.DispatcherServlet: DEBUG
+    
+server:
+  port: 4000
+  
+eureka:
+  instance:
+    hostname: reg.atlasifs.com
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://${eureka.instance.hostname}:${server.port}/eureka/}
